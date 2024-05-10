@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-deployment  # Replace with your desired deployment name
+spec:
+  replicas: 3  # Number of replicas (pods) to run
+  selector:
+    matchLabels:
+      app: ui
+  template:
+    metadata:
+      labels:
+        app: ui
+    spec:
+      containers:
+      - name: ui
+        image: ui:1.0.0  # Replace with your image name and registry
+        imagePullPolicy: Never # https://stackoverflow.com/q/42564211
+        ports:
+        - containerPort: 80
+          # Optional: Add health checks if needed (livenessProbe, readinessProbe)
