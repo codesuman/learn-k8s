@@ -26,7 +26,7 @@
 
 ## Deployment Architecture:
 
-#### Angular UI + Spring Boot API
+#### [Angular UI + Spring Boot API](https://github.com/codesuman/learn-k8s/tree/angular/springbootapi)
 #### React UI + Fast API
 
 # minikube :
