@@ -1,0 +1,23 @@
+# MUST READ : https://zeet.co/blog/kubernetes-deployment-template
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment  # LABEL-A: <-- This is the label of the DEPLOYMENT itself, may be used to filter the deployment based on this label. "k get deployments.apps -L name=api-deployment"
+spec: # SPEC defines REPLICA SET - the desired state of the application, including the number of replicas and the pod template
+  replicas: 1  # Number of replicas (pods) to run
+  selector:
+    matchLabels:
+      app: api  #LABEL-B:  <-- This field defines how the REPLICA SET finds which Pods to manage.
+  template: # TEMPLATE defines the Pod template used by the deployment, including labels and the container specification
+    metadata:
+      labels:
+        app: api  #LABEL-C: <-- This is the label of the POD, this must be same as LABEL-B
+    spec:
+      containers:
+      - name: api
+        image: api:1.0.0  # Replace with your image name and registry
+        imagePullPolicy: Never # https://stackoverflow.com/q/42564211
+        ports:
+        - containerPort: 8080 # It should match default Spring Boot Port unless overridden in application.properties
+          # Optional: Add health checks if needed (livenessProbe, readinessProbe)

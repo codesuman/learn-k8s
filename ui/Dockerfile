@@ -27,7 +27,7 @@ ENV DIST_PATH dist/ui-app
 # Copy our default nginx config
 # https://stackoverflow.com/a/22164038
 # ./conf/nginx.conf : Reverse proxy configuration 
-# COPY ./conf/nginx.conf  /etc/nginx/nginx.conf
+COPY ./conf/nginx.conf  /etc/nginx/nginx.conf
 # ./conf/default.conf : Web Server configuration 
 COPY ./conf/default.conf  /etc/nginx/conf.d/default.conf
 
