@@ -63,11 +63,49 @@ kubectl get pods
 
 kubectl get svc
 
+kubectl get svc,deployments
+
 kubectl get deployment <DEPLOYMENT-NAME> -o wide
 
 kubectl logs deployment/<DEPLOYMENT-NAME>
 
 kubectl logs -f deployment/<DEPLOYMENT-NAME>
+```
+
+## k8s commands to Debug :
+### Testing with curl from Nginx Pod
+
+1. Access the Pod: Use kubectl exec to access the Nginx pod:
+
+```
+kubectl exec -it <nginx-pod-name> -- /bin/bash
+```
+
+2. Test the API Endpoint: Use curl to make a request to the backend API:
+
+```
+curl http://api-service:90/api/
+```
+
+Replace api-service:90 with the correct address and port of your backend service.
+
+### Testing with curl from Backend App Pod
+
+1. Access the Pod: Use kubectl exec to access the Backend App pod:
+
+```
+kubectl exec -it <backend-app-pod-name> -- /bin/bash
+```
+
+2. Test the API Endpoint: Use curl to make a request to the backend API:
+
+```
+curl http://<backend-service-ip>:<backend-service-port>/api/
+```
+Backend Service IP & Port details can be fetched used below kubectl command : 
+
+```
+kubectl get svc
 ```
 
 ## Docker commands :
