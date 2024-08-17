@@ -15,5 +15,3 @@
 
 * Deployment: Deploys the Spring Boot API service, guaranteeing the desired number of Pod replicas are running to handle API requests from the UI.
 * NodePort Service: Exposes the API internally within the Kubernetes cluster. Clients within the cluster can access the API on a specific port mapped by the NodePort value.
-
-[Minikube start issue : minikube start --kubernetes-version=v1.23.8](https://github.com/kubernetes/minikube/issues/14477#issuecomment-1176188284)
