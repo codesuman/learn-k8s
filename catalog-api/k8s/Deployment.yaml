@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api-deployment  # Replace with your desired deployment name
+  name: catalog-api-deployment  # Replace with your desired deployment name
 spec:
   replicas: 2  # Number of replicas (pods) to run
   selector:
     matchLabels:
-      app: api
+      app: catalog-api
   template:
     metadata:
       labels:
-        app: api
+        app: catalog-api
     spec:
       containers:
-      - name: api
-        image: api:1.0.0  # Replace with your image name and registry
+      - name: catalog-api
+        image: catalog-api:1.0.0  # Replace with your image name and registry
         imagePullPolicy: Never # https://stackoverflow.com/q/42564211
         ports:
         - containerPort: 8080 # It should match default Spring Boot Port unless overridden in application.properties

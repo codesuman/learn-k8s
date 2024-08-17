@@ -190,14 +190,25 @@
 
 <div class="content" role="main">
 
-  <!-- Highlight Card -->
+  <!-- Catalog Card -->
   <div class="card highlight-card card-small">
-    <div *ngIf="isLoading;else api_data">
-      Loading data...
+    <div *ngIf="isCatalogLoading;else catalog_data">
+      Loading Catalog...
     </div>
   
-    <ng-template #api_data>
-      <span>{{ data }}</span>
+    <ng-template #catalog_data>
+      <span>{{ catalogData }}</span>
+    </ng-template>
+  </div>
+
+  <!-- Orders Card -->
+  <div class="card highlight-card card-small">
+    <div *ngIf="isOrdersLoading;else orders_data">
+      Loading Orders...
+    </div>
+  
+    <ng-template #orders_data>
+      <span>{{ ordersData }}</span>
     </ng-template>
   </div>
 </div>

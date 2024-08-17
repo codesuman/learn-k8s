@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-api-deployment  # Replace with your desired deployment name
+spec:
+  replicas: 2  # Number of replicas (pods) to run
+  selector:
+    matchLabels:
+      app: orders-api
+  template:
+    metadata:
+      labels:
+        app: orders-api
+    spec:
+      containers:
+      - name: orders-api
+        image: orders-api:1.0.0  # Replace with your image name and registry
+        imagePullPolicy: Never # https://stackoverflow.com/q/42564211
+        ports:
+        - containerPort: 8080 # It should match default Spring Boot Port unless overridden in application.properties
+          # Optional: Add health checks if needed (livenessProbe, readinessProbe)

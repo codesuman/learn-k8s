@@ -8,26 +8,53 @@ import { delay, finalize } from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit{
-  isLoading: boolean = true;
-  data: Object = '';
+  isCatalogLoading: boolean = true;
+  isOrdersLoading: boolean = true;
+
+  catalogData: Object = '';
+  ordersData: Object = '';
 
   constructor(private appService: AppService) { }
 
   ngOnInit(): void {
-    this.isLoading = true;
+    this.getCatalogData();
+    this.getOrdersData();
+  }
 
-    this.appService.getIndexVal()
+  getCatalogData() {
+    this.isCatalogLoading = true;
+
+    this.appService.getCatalog()
     .pipe(
       delay(1000),
-      finalize(() => this.isLoading = false)
+      finalize(() => this.isCatalogLoading = false)
     )
     .subscribe(
       data => {
-        this.data = data;
+        this.catalogData = data;
       },
       err => {
         console.log(err);
-        this.data = 'Something went wrong, please try again later';
+        this.catalogData = 'Something went wrong, please try again later';
+      }
+    );
+  }
+
+  getOrdersData() {
+    this.isOrdersLoading = true;
+
+    this.appService.getOrders()
+    .pipe(
+      delay(1000),
+      finalize(() => this.isOrdersLoading = false)
+    )
+    .subscribe(
+      data => {
+        this.ordersData = data;
+      },
+      err => {
+        console.log(err);
+        this.ordersData = 'Something went wrong, please try again later';
       }
     );
   }

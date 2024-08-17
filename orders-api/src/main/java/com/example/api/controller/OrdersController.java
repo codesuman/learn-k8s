@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @RestController = @Controller + @ResponseBody
  */
 @RestController
-@RequestMapping("/api")
-public class HomeController {
+@RequestMapping("/api/orders")
+public class OrdersController {
     @GetMapping("/")
-    public String home(){
-        return "Hello World, from Spring Boot..!!";
+    public String getAllOrders(){
+        return "Orders Listing..!!";
     }
 }
