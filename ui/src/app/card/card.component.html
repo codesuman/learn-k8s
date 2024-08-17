@@ -1,0 +1,9 @@
+<div class="card highlight-card card-small">
+    <div *ngIf="isDataLoading;else data_template">
+      Loading Data...
+    </div>
+  
+    <ng-template #data_template>
+      <span>{{ data }}</span>
+    </ng-template>
+</div>

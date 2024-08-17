@@ -7,11 +7,7 @@ import { Injectable } from '@angular/core';
 export class AppService {
   constructor(private http: HttpClient) { }
 
-  getCatalog() {
-    return this.http.get(`/api/catalog/`, { responseType: 'text' });
-  }
-
-  getOrders() {
-    return this.http.get(`/api/orders/`, { responseType: 'text' });
+  getData(type: string) {
+    return this.http.get(`/api/${type}/`, { responseType: 'text' });
   }
 }
