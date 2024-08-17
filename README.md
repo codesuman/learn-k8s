@@ -37,6 +37,8 @@ https://minikube.sigs.k8s.io/docs/start/
 
 `minikube start`
 
+[Minikube start issue, try with specific version : ](https://github.com/kubernetes/minikube/issues/14477#issuecomment-1176188284) `minikube start --kubernetes-version=v1.23.8`
+
 `minikube status`
 
 `eval $(minikube docker-env)`
