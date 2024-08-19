@@ -66,10 +66,6 @@
     margin-right: 8px;
   }
 
-  .first-card {
-    margin-top: 16px;
-  }
-
   a,
   a:visited,
   a:hover {
@@ -113,6 +109,11 @@
     align-items: center;
   }
 
+  .toolbar > span {
+    cursor: pointer; 
+    margin: 0 15px;
+  }
+
   /* Responsive Styles */
   @media screen and (max-width: 767px) {
     .card-container > *:not(.circle-link) ,
@@ -129,16 +130,16 @@
 
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <span>Welcome</span>
+  <span routerLink="/">Learn K8S app</span>
+  <span routerLink="/catalog">Catalog</span>
+  <span routerLink="/orders">Orders</span>
+  <div class="spacer"></div>
+  
+  <span>Welcome, guest</span>
 </div>
 
 <div class="content" role="main">
-
-  <!-- Catalog Card -->
-  <app-card type="catalog" class="first-card"></app-card>
-
-  <!-- Orders Card -->
-  <app-card type="orders"></app-card>
+  <router-outlet></router-outlet>
 </div>
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -149,4 +150,3 @@
 <!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-<router-outlet></router-outlet>
