@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { delay, finalize } from 'rxjs';
 
-import { AppService } from '../app.service';
+import { AppService } from '../../services/app.service';
 
 @Component({
   selector: 'app-card',
