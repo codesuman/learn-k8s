@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: orders-api-deployment  # Replace with your desired deployment name
 spec:
-  replicas: 2  # Number of replicas (pods) to run
+  replicas: 1  # Number of replicas (pods) to run
   selector:
     matchLabels:
       app: orders-api
