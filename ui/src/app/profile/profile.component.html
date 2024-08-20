@@ -1,0 +1,7 @@
+<div *ngIf="userName !== '';else guest_template">
+    <span>Welcome, {{userName}}</span>&nbsp; | &nbsp; <span (click)="logout()">Logout</span>
+</div>
+
+<ng-template #guest_template>
+    <span routerLink="/login">Welcome, guest</span>
+</ng-template>

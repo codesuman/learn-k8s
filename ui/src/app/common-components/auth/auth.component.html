@@ -1,0 +1,16 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="username">Username:</label><br>
+        <input id="username" formControlName="username" type="text" />
+    </div>
+
+    <div>
+        <label for="password">Password:</label><br>
+        <input id="password" formControlName="password" type="password" /><br><br>
+    </div>
+    
+    <button type="submit">{{submissionInProgress ? '...' : 'Login'}}</button>
+
+    <p *ngIf="submissionFailedMsg !== ''">{{submissionFailedMsg}}</p>
+</form>
+  

@@ -33,8 +33,7 @@ export class CardComponent {
         this.data = data;
       },
       err => {
-        console.log(err);
-        this.data = 'Something went wrong, please try again later';
+        this.data = err.message;
       }
     );
   }
