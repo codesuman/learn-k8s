@@ -2,6 +2,7 @@
 
 ### VS Code ###
 .vscode/
+api/target/*
 
 # System Files
 .DS_Store

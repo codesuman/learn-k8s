@@ -1,0 +1,45 @@
+# Deployment definition for AUTH API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-api-deployment  # Replace with your desired deployment name
+spec:
+  replicas: 1  # Number of replicas (pods) to run
+  selector:
+    matchLabels:
+      app: auth-api
+  template:
+    metadata:
+      labels:
+        app: auth-api
+    spec:
+      containers:
+      - name: auth-api
+        image: auth-api:1.0.0  # Replace with your image name and registry
+        imagePullPolicy: Never # https://stackoverflow.com/q/42564211
+        ports:
+        - containerPort: 8080 # It should match default Spring Boot Port unless overridden in application.properties
+          # Optional: Add health checks if needed (livenessProbe, readinessProbe)
+        env:   # Setting Environmental Variables
+            - name: DB_HOST   # Setting Database host address
+              value: authdb-svc
+            - name: DB_NAME  # Setting Database name
+              value: auth_db
+            - name: DB_USERNAME  # Setting Database username
+              value: root
+            - name: DB_PASSWORD # Setting Database password
+              value: rootroot
+---
+# Deployment definition to expose AUTH API
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-api-service  # Replace with your desired service name
+spec:
+  selector:
+    app: auth-api
+  ports:
+  - protocol: TCP
+    port: 90
+    targetPort: 8080
+  type: LoadBalancer  # Adjust type (e.g., LoadBalancer, NodePort) if needed
