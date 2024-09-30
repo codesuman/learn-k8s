@@ -70,6 +70,8 @@ kubectl get deployment <DEPLOYMENT-NAME> -o wide
 kubectl logs deployment/<DEPLOYMENT-NAME>
 
 kubectl logs -f deployment/<DEPLOYMENT-NAME>
+
+kubectl delete --all svc,deployments --namespace=default
 ```
 
 ## k8s commands to Debug :

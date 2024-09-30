@@ -6,3 +6,9 @@
 # System Files
 .DS_Store
 Thumbs.db
+
+/api
+/ui
+/catalog-api
+/orders-api
+/auth-api
