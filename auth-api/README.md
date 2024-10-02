@@ -15,3 +15,22 @@ Trigger k8s Deployment & Service :
 ```
 kubectl apply -f Deployment.yaml -f Service.yaml
 ```
+
+
+# Helm Charts
+
+```
+helm package ./auth-api
+```
+
+```
+helm install my-auth-api ./auth-api
+```
+
+```
+helm list
+```
+
+```
+helm uninstall my-auth-api
+```

@@ -1,0 +1,69 @@
+# PersistentVolumeClaim definition for MySQL, dynamically provisioned by cluster
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Values.authDb.pvc.name }}
+  labels:
+    app: mysql
+    tier: database
+spec:
+  accessModes:
+    - ReadWriteOnce    #This specifies the mode of the claim that we are trying to create.
+  resources:
+    requests:
+      storage: {{ .Values.authDb.pvc.storage }}    #This will tell kubernetes about the amount of space we are trying to claim.
+---
+# Deployment definition for MySQL
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.authDb.deployment.name }}
+  labels:
+    app: mysql
+    tier: database
+spec:
+  replicas: {{ .Values.authDb.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels: # Must match 'Service' and 'Deployment' selectors
+        app: mysql
+        tier: database
+    spec:
+      containers:
+      - name: mysql
+        image: {{ .Values.authDb.image.name }}
+        imagePullPolicy: {{ .Values.authDb.image.pullPolicy }}
+        ports:
+          - containerPort: {{ .Values.authDb.service.targetPort }}
+        env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: {{ .Values.authDb.env.dbPassword }} # Change as per your requirements
+          - name: MYSQL_DATABASE
+            value: {{ .Values.authDb.env.dbName }}
+        volumeMounts:
+          - name: authdb-persistent-storage
+            mountPath: /var/lib/mysql
+      volumes:
+        - name: authdb-persistent-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.authDb.pvc.name }}
+---
+# Service definition to expose MySQL
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.authDb.service.name }}
+  labels: # This labels block might be redundant
+    app: mysql
+    tier: database
+spec:
+  ports:
+    - port: {{ .Values.authDb.service.port }}
+      targetPort: {{ .Values.authDb.service.targetPort }}
+  selector:
+    app: mysql
+    tier: database
+  clusterIP: None # Headless service, for DNS resolution between pods

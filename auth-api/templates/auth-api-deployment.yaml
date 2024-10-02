@@ -1,0 +1,45 @@
+# Deployment definition for AUTH API
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.authApi.deployment.name }}
+spec:
+  replicas: {{ .Values.authApi.deployment.replicas }}
+  selector:
+    matchLabels:
+      app: {{ .Values.authApi.app.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.authApi.app.name }}
+    spec:
+      containers:
+      - name: {{ .Values.authApi.app.name }}
+        image: {{ .Values.authApi.image.name }}
+        imagePullPolicy: {{ .Values.authApi.image.pullPolicy }} # https://stackoverflow.com/q/42564211
+        ports:
+        - containerPort: {{ .Values.authApi.service.targetPort }} # It should match default Spring Boot Port unless overridden in application.properties
+          # Optional: Add health checks if needed (livenessProbe, readinessProbe)
+        env:   # Setting Environmental Variables
+        - name: DB_HOST
+          value: {{ .Values.authDb.service.name }}
+        - name: DB_NAME
+          value: {{ .Values.authDb.env.dbName }}
+        - name: DB_USERNAME
+          value: {{ .Values.authDb.env.dbUsername }}
+        - name: DB_PASSWORD
+          value: {{ .Values.authDb.env.dbPassword }}
+---
+# Deployment definition to expose AUTH API
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.authApi.service.name }}  # Replace with your desired service name
+spec:
+  selector:
+    app: {{ .Values.authApi.app.name }}
+  ports:
+  - protocol: TCP
+    port: {{ .Values.authApi.service.port }}
+    targetPort: {{ .Values.authApi.service.targetPort }}
+  type: LoadBalancer  # Adjust type (e.g., LoadBalancer, NodePort) if needed

@@ -1,0 +1,35 @@
+# Global configurations for both Auth API and MySQL
+authApi:
+  app:
+    name: auth-api
+  deployment:
+    name: auth-api-deployment
+    replicas: 1
+  image:
+    name: auth-api:1.0.0
+    pullPolicy: Never
+  service:
+    name: auth-api-service
+    targetPort: 8080
+    port: 90
+
+authDb:
+  app:
+    name: auth-db
+  deployment:
+    name: auth-db-deployment
+    replicas: 1
+  image:
+    name: mysql:8.0
+    pullPolicy: IfNotPresent
+  service:
+    name: auth-db-svc
+    targetPort: 3306
+    port: 3306
+  pvc:
+    name: authdb-pv-claim
+    storage: 1Gi
+  env:
+    dbName: auth_db
+    dbUsername: root
+    dbPassword: rootroot
