@@ -91,6 +91,15 @@ curl http://api-service:90/api/
 
 Replace api-service:90 with the correct address and port of your backend service.
 
+3. Describe any resource : 
+
+```
+kubectl describe [resource_type] [resource_name]
+```
+
+[Complete details about Describe command](https://refine.dev/blog/kubectl-describe-pod/)
+
+
 ### Testing with curl from Backend App Pod
 
 1. Access the Pod: Use kubectl exec to access the Backend App pod:
